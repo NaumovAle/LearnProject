@@ -1,0 +1,71 @@
+<div>
+   <mat-toolbar>
+      <p class="top-toolbar">My Application</p>
+   </mat-toolbar>
+</div>
+<mat-drawer-container class="example-container">
+   <mat-drawer mode="side" opened class="mat-drawer">
+      <div>
+         <mat-toolbar>
+            <button
+               (click)="isMenuOpen = !isMenuOpen"
+               mat-icon-button
+               class="example-icon"
+               aria-label="Example icon-button with menu icon">
+               <mat-icon>menu</mat-icon>
+            </button>
+
+            <span routerLink="">Главная</span>
+            <div class="example-button-container">
+               <button
+                  mat-mini-fab
+                  color="accent"
+                  aria-label="Example icon button with a plus one icon">
+                  <mat-icon>shop</mat-icon>
+               </button>
+            </div>
+         </mat-toolbar>
+         <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+               <mat-label>Поиск</mat-label>
+               <input matInput placeholder="Найти" />
+            </mat-form-field>
+         </form>
+      </div>
+
+      <ng-container *ngIf="isMenuOpen">
+         <ng-container *ngTemplateOutlet="menu"></ng-container>
+      </ng-container>
+
+      <ng-template #menu>
+         <mat-list role="list" class="mat-toolbar">
+            <mat-list-item
+               role="listitem"
+               routerLink="/shop"
+               (click)="isShopOpen = true; isMenuOpen = false">
+               Магазин
+            </mat-list-item>
+            <mat-list-item
+               role="listitem"
+               routerLink="/about"
+               (click)="isShopOpen = false">
+               О магазине
+            </mat-list-item>
+            <mat-list-item
+               role="listitem"
+               routerLink="/contact"
+               (click)="isShopOpen = false">
+               Контакты
+            </mat-list-item>
+            <mat-list-item role="listitem"
+               ><a href="https://vk.com/fox__alex"
+                  >Мы ВКонтакте</a
+               ></mat-list-item
+            >
+         </mat-list>
+      </ng-template>
+   </mat-drawer>
+   <mat-drawer-content>
+      <app-shop *ngIf="isShopOpen"></app-shop>
+   </mat-drawer-content>
+</mat-drawer-container>
